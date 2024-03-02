@@ -1,0 +1,1 @@
+console.log('asignment six is ok')
