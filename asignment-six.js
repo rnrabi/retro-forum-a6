@@ -10,12 +10,14 @@ const displayData = (allPosts) => {
     // console.log(allPosts)
     const postContainer = document.getElementById('post-container');
     allPosts.forEach(post => {
-        console.log(post);
+        // console.log(post);
         const div = document.createElement('div');
         // div.classList = `hero-content flex-col lg:flex-row`;
-        div.classList.add('hero-content', 'flex-col', 'lg:flex-row','lg:items-baseline');
+        div.classList.add('hero-content', 'flex-col', 'lg:flex-row','lg:items-start');
         div.innerHTML = ` <img class="w-14 rounded-full" src="${post.image}"
         class="max-w-sm rounded-lg shadow-2xl" />
+
+        <div class="badge ${post.isActive?'badge-primary' : 'badge-secondary'}  badge-sm relative ml-[-20px]"></div>
 
     <div>
 
@@ -33,7 +35,7 @@ const displayData = (allPosts) => {
                     <li><i class="fa-regular fa-clock"></i><span>${post.posted_time}min</span></li>
                 </ul>
             </div>
-            <div class="bg-green-500 rounded-full p-2">
+            <div onclick="addTitleView('${post.title}', '${post.view_count}')" class="bg-green-500 rounded-full p-2">
                 <i class="fa-solid fa-envelope-open-text"></i>
             </div>
         </div>
@@ -70,6 +72,21 @@ const displayLatest = (latests) => {
         latestContainer.appendChild(div);
     })
 }
+
+const addTitleView = (title , view)=>{
+    const titleView = document.getElementById('title-view');
+    const div = document.createElement('div');
+    div.classList.add('card-body', 'shadow-xl');
+    div.innerHTML = `
+    <div class="md:flex items-center">
+         <h2 class="card-title">${title}</h2>
+         <i class="fa-regular fa-eye"></i><span>${view}</span>
+  </div>
+    `;
+    titleView.appendChild(div);
+    console.log(title, view)
+}
+
 
 latestPostLoad();
 
