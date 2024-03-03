@@ -45,6 +45,25 @@ const displayData = (allPosts) => {
     })
 }
 
+const categoryDisplay = (category)=>{
+    displayData(category)
+}
+
+const categoryByPostLoad = async ()=>{
+    const postContainer = document.getElementById('post-container');
+    postContainer.innerHTML = '';
+    const inputText = document.getElementById('input-text').value;
+    const res = await fetch(`https://openapi.programming-hero.com/api/retro-forum/posts?category=${inputText}`);
+    const data = await res.json();
+    categoryDisplay(data.posts)
+    console.log(data.posts);
+}
+
+
+
+
+
+
 const latestPostLoad = async () => {
     const res = await fetch(`https://openapi.programming-hero.com/api/retro-forum/latest-posts`);
     const latestData = await res.json();
@@ -59,21 +78,33 @@ const displayLatest = (latests) => {
         // console.log(latest)
         const div = document.createElement('div');
         div.classList.add('card', 'w-96', 'glass');
-        div.innerHTML = `  <figure><img src="https://daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"
+        div.innerHTML = `  <figure><img src="${latest.cover_image}"
        alt="car!" /></figure>
-            <div class="card-body">
-            <h2 class="card-title">Life hack</h2>
-            <p>How to park your car at your garage?</p>
-            <div class="card-actions justify-end">
-                <button class="btn btn-primary">Learn now!</button>
+        <div class="card-body">
+            <p><i class="fa-regular fa-calendar-days"></i> ${latest.author.posted_date}</p>
+            <h2 class="card-title">${latest.title}</h2>
+            <p>${latest.description}</p>
+            <div class="flex gap-10 items-center">
+            <img class="w-14 rounded-full" src="${latest.
+                profile_image
+                }"/>
+                <div>
+                    <h2>${latest.author.name}</h2>
+                    <p>${latest.author.designation?latest.author.designation : 'unknown'}</p>
+                </div>
             </div>
-            </div>
+        </div>
 `;
         latestContainer.appendChild(div);
     })
 }
 
+let count = 1;
 const addTitleView = (title , view)=>{
+    const markRead = document.getElementById('markRead');
+    markRead.innerText = count;
+    count++;
+
     const titleView = document.getElementById('title-view');
     const div = document.createElement('div');
     div.classList.add('card-body', 'shadow-xl');

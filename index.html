@@ -38,8 +38,8 @@
                     <h2 class="text-3xl md:text-white mb-5">Welcome to the ReTro Forum</h2>
                     <p class="md:text-white mb-5">Share your favorite opinion and win and wp forum coffee mug!</p>
                     <div class=" flex justify-between bg-slate-50 md:p-2 rounded-full">
-                        <input type="text" placeholder="search here anything">
-                        <button class="bg-green-700 p-2 px-4 text-white rounded-full">search</button>
+                        <input id="input-text" type="text" placeholder="search here anything">
+                        <button onclick="categoryByPostLoad()" class="bg-green-700 p-2 px-4 text-white rounded-full">search</button>
                     </div>
                 </div>
 
@@ -112,7 +112,7 @@
                     <div>
                         <div class="flex justify-between">
                             <h2>Title</h2>
-                            <h3> <i class="fa-solid fa-check-double"></i> mark as read <span>4</span></h3>
+                            <h3> <i class="fa-solid fa-check-double"></i> mark as read <span id="markRead">0</span></h3>
                         </div>
                         <div>
                             <div id="title-view" class="card w-96 bg-base-100 shadow-xl">
@@ -148,7 +148,7 @@
                 <h2 class="text-center text-3xl">Latest Posts</h2>
                 <p class="text-center">Yes, you can run unit tests and view the results directly within the app. The
                     integrated testing features allow for a streamlined .</p>
-                <div id="latest-posts" class="md:grid grid-cols-3">
+                <div id="latest-posts" class="md:grid gap-8 grid-cols-3">
                     <!-- <div class="card w-96 glass">
                         <figure><img src="https://daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"
                                 alt="car!" /></figure>
