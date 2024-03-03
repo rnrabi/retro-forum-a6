@@ -12,7 +12,6 @@ const displayData = (allPosts) => {
     allPosts.forEach(post => {
         // console.log(post);
         const div = document.createElement('div');
-        // div.classList = `hero-content flex-col lg:flex-row`;
         div.classList.add('hero-content', 'flex-col', 'lg:flex-row','lg:items-start');
         div.innerHTML = ` <img class="w-14 rounded-full" src="${post.image}"
         class="max-w-sm rounded-lg shadow-2xl" />
@@ -21,9 +20,9 @@ const displayData = (allPosts) => {
 
     <div>
 
-        <h2># <span>${post.category}</span> author: <span>${post.author.name}</span></h2>
-        <h1 class="text-3xl font-bold">${post.title}</h1>
-        <p class="py-6">${post.description}</p>
+        <h2># <span class="text-sm font-medium">${post.category}</span> author: <span>${post.author.name}</span></h2>
+        <h1 class="text-2xl font-bold mulish">${post.title}</h1>
+        <p class="py-6 text-[#12132D99]">${post.description}</p>
 
         <div class="divider"></div>
 
@@ -60,10 +59,6 @@ const categoryByPostLoad = async ()=>{
 }
 
 
-
-
-
-
 const latestPostLoad = async () => {
     const res = await fetch(`https://openapi.programming-hero.com/api/retro-forum/latest-posts`);
     const latestData = await res.json();
@@ -81,15 +76,15 @@ const displayLatest = (latests) => {
         div.innerHTML = `  <figure><img src="${latest.cover_image}"
        alt="car!" /></figure>
         <div class="card-body">
-            <p><i class="fa-regular fa-calendar-days"></i> ${latest.author.posted_date}</p>
-            <h2 class="card-title">${latest.title}</h2>
-            <p>${latest.description}</p>
+            <p><i class="fa-regular fa-calendar-days"></i> ${latest.author.posted_date?latest.author.posted_date : 'no publish date'}</p>
+            <h2 class="card-title text-lg font-extrabold text-[#12132D]">${latest.title}</h2>
+            <p class="mulish text-[#12132D99]">${latest.description}</p>
             <div class="flex gap-10 items-center">
             <img class="w-14 rounded-full" src="${latest.
                 profile_image
                 }"/>
                 <div>
-                    <h2>${latest.author.name}</h2>
+                    <h2 class="font-semibold mulish text-[#12132D]">${latest.author.name}</h2>
                     <p>${latest.author.designation?latest.author.designation : 'unknown'}</p>
                 </div>
             </div>
