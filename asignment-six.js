@@ -10,13 +10,13 @@ const displayData = (allPosts) => {
     // console.log(allPosts)
     const postContainer = document.getElementById('post-container');
     allPosts.forEach(post => {
-        // console.log(post);
+        console.log(post);
         const div = document.createElement('div');
-        div.classList.add('hero-content', 'flex-col', 'lg:flex-row','lg:items-start');
+        div.classList.add('hero-content', 'flex-col', 'lg:flex-row', 'lg:items-start');
         div.innerHTML = ` <img class="w-14 rounded-full" src="${post.image}"
         class="max-w-sm rounded-lg shadow-2xl" />
 
-        <div class="badge ${post.isActive?'badge-primary' : 'badge-secondary'}  badge-sm relative ml-[-20px]"></div>
+        <div class="badge ${post.isActive ? 'badge-success' : 'badge-error'}  badge-sm relative ml-[-20px]"></div>
 
     <div>
 
@@ -42,20 +42,26 @@ const displayData = (allPosts) => {
     </div>`;
         postContainer.appendChild(div);
     })
+    spinner.classList.add('hidden');
 }
 
-const categoryDisplay = (category)=>{
+const categoryDisplay = (category) => {
     displayData(category)
 }
 
-const categoryByPostLoad = async ()=>{
+const categoryByPostLoad = () => {
+    const spinner = document.getElementById('spinner');
+    spinner.classList.remove('hidden');
     const postContainer = document.getElementById('post-container');
     postContainer.innerHTML = '';
     const inputText = document.getElementById('input-text').value;
-    const res = await fetch(`https://openapi.programming-hero.com/api/retro-forum/posts?category=${inputText}`);
-    const data = await res.json();
-    categoryDisplay(data.posts)
-    console.log(data.posts);
+    setTimeout(async () => {
+        const res = await fetch(`https://openapi.programming-hero.com/api/retro-forum/posts?category=${inputText}`);
+        const data = await res.json();
+        categoryDisplay(data.posts)
+    }, 2000);
+   
+    // console.log(data.posts);
 }
 
 
@@ -76,16 +82,16 @@ const displayLatest = (latests) => {
         div.innerHTML = `  <figure><img src="${latest.cover_image}"
        alt="car!" /></figure>
         <div class="card-body">
-            <p><i class="fa-regular fa-calendar-days"></i> ${latest.author.posted_date?latest.author.posted_date : 'no publish date'}</p>
+            <p><i class="fa-regular fa-calendar-days"></i> ${latest.author.posted_date ? latest.author.posted_date : 'no publish date'}</p>
             <h2 class="card-title text-lg font-extrabold text-[#12132D]">${latest.title}</h2>
             <p class="mulish text-[#12132D99]">${latest.description}</p>
             <div class="flex gap-10 items-center">
             <img class="w-14 rounded-full" src="${latest.
                 profile_image
-                }"/>
+            }"/>
                 <div>
                     <h2 class="font-semibold mulish text-[#12132D]">${latest.author.name}</h2>
-                    <p>${latest.author.designation?latest.author.designation : 'unknown'}</p>
+                    <p>${latest.author.designation ? latest.author.designation : 'unknown'}</p>
                 </div>
             </div>
         </div>
@@ -95,7 +101,7 @@ const displayLatest = (latests) => {
 }
 
 let count = 1;
-const addTitleView = (title , view)=>{
+const addTitleView = (title, view) => {
     const markRead = document.getElementById('markRead');
     markRead.innerText = count;
     count++;
