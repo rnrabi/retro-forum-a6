@@ -78,7 +78,7 @@ const displayLatest = (latests) => {
     latests.forEach(latest => {
         // console.log(latest)
         const div = document.createElement('div');
-        div.classList.add('card', 'w-96', 'glass');
+        div.classList.add('card', 'w-full', 'glass', 'mb-8','md:mb-0');
         div.innerHTML = `  <figure><img src="${latest.cover_image}"
        alt="car!" /></figure>
         <div class="card-body">
@@ -110,7 +110,7 @@ const addTitleView = (title, view) => {
     const div = document.createElement('div');
     div.classList.add('card-body', 'shadow-xl');
     div.innerHTML = `
-    <div class="md:flex items-center">
+    <div class="flex gap-5 items-center">
          <h2 class="card-title">${title}</h2>
          <i class="fa-regular fa-eye"></i><span>${view}</span>
   </div>
